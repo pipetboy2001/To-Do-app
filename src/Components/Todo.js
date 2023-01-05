@@ -19,17 +19,20 @@ class TODO extends Component {
 
     render() {
         return (
-            <div className='container'>
-                <h1>#To Do</h1>
-                <Segmented
-                    block
-                    options={['All', 'Active', 'Complete']}
-                    onChange={this.handlePageChange}
-                />
-                {this.state.currentPage === 'All' && <AllTasks />}
-                {this.state.currentPage === 'Active' && <ActiveTasks />}
-                {this.state.currentPage === 'Complete' && <CompleteTasks />}
+            <div className='root'>
+                <div className='container'>
+                    <h1>#To Do</h1>
+                    <Segmented
+                        block
+                        options={['All', 'Active', 'Complete']}
+                        onChange={this.handlePageChange}
+                    />
+                    {this.state.currentPage === 'All' && <AllTasks />}
+                    {this.state.currentPage === 'Active' && <ActiveTasks />}
+                    {this.state.currentPage === 'Complete' && <CompleteTasks />}
+                </div>
             </div>
+            
         );
     }
 }
