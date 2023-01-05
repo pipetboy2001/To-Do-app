@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "description": "Comprar leche",
+    "status": "active"
+  },
+  {
+    "id": 2,
+    "description": "Pagar la renta",
+    "status": "active"
+  },
+  {
+    "id": 3,
+    "description": "Llamar a mamá",
+    "status": "complete"
+  },
+  {
+    "id": 4,
+    "description": "Hacer ejercicio",
+    "status": "active"
+  }
+]

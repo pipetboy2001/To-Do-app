@@ -1,9 +1,11 @@
 import React from 'react';
+import  Todo  from './Components/Todo';
+
 
 function App() {
   return (
     <div >
-      <h1>My First React App</h1>
+      <Todo/>
     </div>
   );
 }
