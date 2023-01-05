@@ -1,7 +1,12 @@
-import { React} from 'react';
-import tasks from '../../JSON/Task.json'; // archivo JSON con las tareas
-import { Checkbox } from 'antd';
+import { React } from 'react';
 import '../../Styles/Funciones.css'
+import tasks from '../../JSON/Task.json'; // archivo JSON con las tareas
+//icons
+import { IoTrashBin } from "react-icons/io5";
+import { IoPencil } from "react-icons/io5";
+
+//Ant impor
+import { Checkbox } from 'antd';
 
 function Complete() {
     // función para cambiar el estado de una tarea
@@ -19,6 +24,10 @@ function Complete() {
     //Que el atributo sea Complete
     const completeTasks = tasks.filter(task => task.status === "complete");
 
+    // función para eliminar una tarea
+    const deleteTask = (index) => {
+        tasks.splice(index, 1);
+    };
 
     return (
         <div className='Lista'>
@@ -27,10 +36,14 @@ function Complete() {
                 <Checkbox
                     className='Checkbox'
                     key={task.id}
-                    defaultChecked={task.status === "complete"}
+                    checked={task.status === "complete"}
                     onChange={(e) => changeStatus(e, index)}
                     style={task.status === "complete" ? { textDecoration: "line-through" } : {}}>
-                    {task.description}
+                    {task.description} 
+                    <div className="icon-container">
+                        <IoPencil className='pencil' />
+                        <IoTrashBin className='trash' onClick={() => deleteTask(index)} />
+                    </div>
                 </Checkbox>
             ))}
 

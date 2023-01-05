@@ -6,10 +6,29 @@
     margin: 0 auto;
     padding: 10px;
     width: 70%;
+    display: flex;
+    flex-direction: column
 }
 
 .Checkbox{
     margin: 0 10px;
-    /* colocar en columnas*/
-    width: 50%;
+}
+
+.icon-container {
+    display: inline-block;
+    position: relative;
+    margin: 0 10px;
+    text-align: right;
+}
+
+.pencil{
+    color: rgb(33, 0, 104);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.trash{
+    color: rgb(255, 0, 0);
+    font-size: 20px;
+    cursor: pointer;
 }
