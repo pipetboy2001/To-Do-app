@@ -3,7 +3,7 @@ import ActiveTasks from './Funciones/Active';
 import CompleteTasks from './Funciones/Complete';
 import AllTasks from './Funciones/All';
 import { Segmented } from 'antd';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import '../Styles/Todo.css'
 
 class TODO extends Component {
@@ -36,7 +36,8 @@ class TODO extends Component {
         );
     }
 }
+createRoot(document.getElementById('root')).render(<TODO />);
 
-ReactDOM.render(<TODO />, document.getElementById('root'));
+
 
 export default TODO;

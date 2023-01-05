@@ -1,10 +1,9 @@
 import { React, useState } from 'react';
-import tasks from './../../JSON/Task.json'; // archivo JSON con las tareas
+import tasks from '../../JSON/Task.json'; // archivo JSON con las tareas
 import { Checkbox } from 'antd';
 import '../../Styles/Funciones.css'
 import { Input } from 'antd';
 const { Search } = Input;
-
 
 function Active() {
     // constante para añadir un nuevo id
@@ -32,17 +31,41 @@ function Active() {
             description: e.target.value,
         });
     };
+    // función para cambiar el estado de una tarea
+    const changeStatus = (e, index) => {
+        // Si se marca el checkbox, se cambia el estado a "complete"
+        if (e.target.checked) {
+            tasks[index].status = "complete";
+        }
+        // Si se desmarca el checkbox, se cambia el estado a "active"
+        else {
+            tasks[index].status = "active";
+        }
+    };
+
+    //Que el atributo sea active
+    const activeTasks = tasks.filter(task => task.status === "active");
+
 
     return (
         <div className='Lista'>
             {/* Añadir un input para agregar task */}
             <Search placeholder="Añade una tarea" allowClear enterButton="Añadir" size="large" onChange={addTaskInput} onSearch={addTaskJson} />
-            {tasks
-                .filter((task) => task.status === 'active')
-                .map((task) => (
-                    <Checkbox className='Checkbox' key={task.id}>{task.description}</Checkbox>
-                ))}
+            {/* Mapear las tareas */}
+            {activeTasks.map((task, index) => (
+                <Checkbox
+                    className='Checkbox'
+                    key={task.id}
+                    defaultChecked={task.status === "complete"}
+                    onChange={(e) => changeStatus(e, index)}
+                    style={task.status === "complete" ? { textDecoration: "line-through" } : {}}
+                >
+                    {task.description}
+                </Checkbox>
+            ))}
+
         </div>
     );
 }
 export default Active;
+
