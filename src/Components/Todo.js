@@ -1,27 +1,39 @@
-import React from 'react'
-import All from './Funciones/All'
+import React, { Component } from 'react';
+import ActiveTasks from './Funciones/Active';
+import CompleteTasks from './Funciones/Complete';
+import AllTasks from './Funciones/All';
+import { Segmented } from 'antd';
+import ReactDOM from 'react-dom';
 import '../Styles/Todo.css'
-import Complete from './Funciones/Complete'
-import Active from './Funciones/Active'
 
+class TODO extends Component {
+    state = {
+        currentPage: 'all',
+    };
 
-export const Todo = () => {
-  return (
-    <div className='container'>
-        <h1>#Todo</h1>
-        {/* aqui va la seleccion entre all active o completed */}
+    handlePageChange = (page) => {
+        this.setState({
+            currentPage: page,
+        });
+    };
 
-        {/* aqui va todo listado de tareas */}
-        <All/>
-
-        {/* aqui va el boton de clear completed */}
-        <Complete/>
-
-        {/* y aqui van las que faltan por realizar */}
-        <Active/>
-
-    </div>
-  )
+    render() {
+        return (
+            <div className='container'>
+                <h1>#To Do</h1>
+                <Segmented
+                    block
+                    options={['All', 'Active', 'Complete']}
+                    onChange={this.handlePageChange}
+                />
+                {this.state.currentPage === 'All' && <AllTasks />}
+                {this.state.currentPage === 'Active' && <ActiveTasks />}
+                {this.state.currentPage === 'Complete' && <CompleteTasks />}
+            </div>
+        );
+    }
 }
 
-export default Todo
+ReactDOM.render(<TODO />, document.getElementById('root'));
+
+export default TODO;
