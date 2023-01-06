@@ -11,8 +11,9 @@ const { Search } = Input;
 function Active() {
 
     //Conservar en el navegador
-    localStorage.setItem("tasksSave", JSON.stringify(tasks));
-    const tasksSave = JSON.parse(localStorage.getItem("tasksSave"));
+    window.localStorage.setItem("tasksSave", JSON.stringify(tasks));
+    const tasksSave = JSON.parse(window.localStorage.getItem("tasksSave"));
+
 
     // constante para añadir un nuevo id
     const nextId = tasks[tasks.length - 1].id + 1;

@@ -21,14 +21,23 @@
     text-align: right;
 }
 
-.pencil{
-    color: rgb(33, 0, 104);
-    font-size: 20px;
-    cursor: pointer;
-}
 
 .trash{
     color: rgb(255, 0, 0);
     font-size: 20px;
     cursor: pointer;
+    border: rgb(0, 0, 0);
+}
+
+.trashAll{
+    color: rgb(255, 255, 255);
+    font-size: auto;
+    cursor: pointer;
+    width: 21%;
+    min-width: 20%;
+    margin: auto 80%;
+    background-color: red;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #ccc;
 }
