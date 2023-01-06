@@ -55,10 +55,13 @@ function All() {
     
     // función para eliminar una tarea
     const deleteTask = (index) => {
-        if (tasks.length > 0) {
+        if (tasks.length > 2) {
             if (window.confirm("¿Estás seguro de que quieres eliminar esta tarea?")) {
                 tasks.splice(index, 1);
             }
+        }
+        else {
+            alert("No puedes eliminar todas las tareas");
         }
     };
 
