@@ -3,12 +3,16 @@ import '../../Styles/Funciones.css'
 import tasks from '../../JSON/Task.json'; // archivo JSON con las tareas
 //icons
 import { IoTrashBin } from "react-icons/io5";
-import { IoPencil } from "react-icons/io5";
 
 //Ant impor
 import { Checkbox } from 'antd';
 
 function Complete() {
+
+    //Conservar en el navegador
+    localStorage.setItem("tasksSave", JSON.stringify(tasks));
+    const tasksSave = JSON.parse(localStorage.getItem("tasksSave"));
+
     // función para cambiar el estado de una tarea
     const changeStatus = (e, index) => {
         // Si se marca el checkbox, se cambia el estado a "complete"
@@ -22,17 +26,23 @@ function Complete() {
     };
 
     //Que el atributo sea Complete
-    const completeTasks = tasks.filter(task => task.status === "complete");
+    const completeTasksSave = tasksSave.filter(task => task.status === "complete");
 
     // función para eliminar una tarea
     const deleteTask = (index) => {
-        tasks.splice(index, 1);
+        if (tasks.length > 2) {
+            if (window.confirm("¿Estás seguro de que quieres eliminar esta tarea?")) {
+                tasks.splice(index, 1);
+            }
+        }
+        else {
+            window.alert("No puedes eliminar todas las tareas");
+        }
     };
 
     return (
-        <div className='Lista'>
-            
-            {completeTasks.map((task, index) => (
+        <div className='Lista'> 
+            {completeTasksSave.map((task, index) => (
                 <Checkbox
                     className='Checkbox'
                     key={task.id}
@@ -41,12 +51,10 @@ function Complete() {
                     style={task.status === "complete" ? { textDecoration: "line-through" } : {}}>
                     {task.description} 
                     <div className="icon-container">
-                        <IoPencil className='pencil' />
                         <IoTrashBin className='trash' onClick={() => deleteTask(index)} />
                     </div>
                 </Checkbox>
             ))}
-
         </div>
     );
 }

@@ -3,12 +3,11 @@ import ActiveTasks from './Funciones/Active';
 import CompleteTasks from './Funciones/Complete';
 import AllTasks from './Funciones/All';
 import { Segmented } from 'antd';
-import { createRoot } from 'react-dom/client';
 import '../Styles/Todo.css'
 
 class TODO extends Component {
     state = {
-        currentPage: 'all',
+        currentPage: 'All',
     };
 
     handlePageChange = (page) => {
@@ -32,12 +31,9 @@ class TODO extends Component {
                     {this.state.currentPage === 'Complete' && <CompleteTasks />}
                 </div>
             </div>
-            
         );
     }
 }
-createRoot(document.getElementById('root')).render(<TODO />);
-
 
 
 export default TODO;

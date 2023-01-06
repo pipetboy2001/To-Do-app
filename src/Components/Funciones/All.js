@@ -3,7 +3,6 @@ import '../../Styles/Funciones.css'
 import tasks from '../../JSON/Task.json'; // archivo JSON con las tareas
 //icons
 import { IoTrashBin } from "react-icons/io5";
-import { IoPencil } from "react-icons/io5";
 
 //Ant impor
 import { Checkbox } from 'antd';
@@ -11,6 +10,11 @@ import { Input } from 'antd';
 const { Search } = Input;
 
 function All() {
+
+    //Conservar en el navegador
+    localStorage.setItem("tasksSave", JSON.stringify(tasks));
+    const tasksSave = JSON.parse(localStorage.getItem("tasksSave"));
+
     // constante para añadir un nuevo id
     const nextId = tasks[tasks.length - 1].id + 1;
     // constante para añadir una nueva tarea
@@ -50,7 +54,11 @@ function All() {
     
     // función para eliminar una tarea
     const deleteTask = (index) => {
-        tasks.splice(index, 1);
+        if (tasks.length > 0) {
+            if (window.confirm("¿Estás seguro de que quieres eliminar esta tarea?")) {
+                tasks.splice(index, 1);
+            }
+        }
     };
 
     return (
@@ -58,18 +66,15 @@ function All() {
             {/* Añadir un input para agregar task */}
             <Search placeholder="Añade una tarea" allowClear enterButton="Añadir" size="large" onChange={addTaskInput} onSearch={addTaskJson} />
             {/* Mapear las tareas */}
-            {tasks.map((task, index) => (
+            {tasksSave.map((task, index) => (
                 <Checkbox
                     className='Checkbox'
                     key={task.id} defaultChecked={task.status === "complete"}
                     onChange={(e) => changeStatus(e, index)}
-                    style={task.status === "complete" ? { textDecoration: "line-through" } : {}}
-                >
+                    style={task.status === "complete" ? { textDecoration: "line-through" } : {}}>
                     {task.description}
                     <div className="icon-container">
-                        <IoPencil className='pencil'/>
                         <IoTrashBin className='trash' onClick={() => deleteTask(index)} />
-
                     </div>
                 </Checkbox>
             ))}
